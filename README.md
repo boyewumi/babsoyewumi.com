@@ -32,15 +32,6 @@ This is my personal website where I document what I'm learning and building in R
 
 This website is built using the excellent [tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) template, customized for technical content and professional branding.
 
-### Key Features
-
-- ⚡ Fast and SEO-optimized
-- 📱 Fully responsive design
-- 🎨 Customizable theme
-- 📊 Built-in analytics support
-- 🔍 Full-text search
-- 📝 MDX support for rich content
-
 ## 📧 Connect With Me
 
 - **Website**: babsoyewumi.com _(Work in progress)_
