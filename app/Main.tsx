@@ -19,7 +19,24 @@ export default function Home({ posts }) {
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {!posts.length && 'No posts found.'}
+          {!posts.length && (
+            <li className="py-12">
+              <div className="space-y-4 text-center">
+                <div className="text-6xl">🚀</div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  Content Coming Soon
+                </h3>
+                <p className="mx-auto max-w-md text-gray-500 dark:text-gray-400">
+                  I'm currently working on sharing insights about Design Systems and React DevTools.
+                  Check back soon for deep dives into component architecture, debugging workflows,
+                  and systematic UI development.
+                </p>
+                <div className="text-sm text-gray-400 dark:text-gray-500">
+                  Building something great takes time ⚡
+                </div>
+              </div>
+            </li>
+          )}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
             const { slug, date, title, summary, tags } = post
             return (
