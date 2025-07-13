@@ -34,7 +34,7 @@ This website is built using the excellent [tailwind-nextjs-starter-blog](https:/
 
 ## 📧 Connect With Me
 
-- **Website**: babsoyewumi.com _(Work in progress)_
+- **Website**: [babsoyewumi.com](https://babsoyewumi.com/) _(Work in progress)_
 - **Email**: _(Work in progress)_
 
 ## 📄 License
