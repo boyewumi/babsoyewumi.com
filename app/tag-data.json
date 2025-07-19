@@ -1,1 +1,7 @@
-{}
+{
+  "react": 1,
+  "design-system": 1,
+  "vite": 1,
+  "typescript": 1,
+  "frontend": 1
+}
