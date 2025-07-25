@@ -12,7 +12,7 @@ const siteMetadata = {
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo/favicon-32x32.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
   mastodon: '',
-  email: '',
+  email: 'babs@babsoyewumi.com',
   github: 'https://github.com/boyewumi',
   x: '',
   // twitter: 'https://twitter.com/Twitter',
