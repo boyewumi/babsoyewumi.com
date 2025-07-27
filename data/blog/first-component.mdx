@@ -1,0 +1,180 @@
+---
+title: "Building My First Component: What I Learned Making a 'Simple' Button"
+date: '2025-07-27'
+tags:
+  [
+    'react',
+    'ui-library',
+    'design-systems',
+    'accessibility',
+    'typescript',
+    'react-aria',
+    'tailwind',
+    'cva',
+    'component-architecture',
+    'learning-in-public',
+  ]
+draft: false
+summary: "A week ago, I planned to build a React UI library. Starting with a button taught me that there's nothing simple about truly good components."
+---
+
+I'm building a React UI library from scratch to deeply understand scalable, accessible component systems. This is part of a learning-in-public series where I share what works, what breaks, and what I learn from each step.
+
+## Preview
+
+<div className="-mx-2 flex flex-wrap overflow-hidden xl:-mx-2">
+  ![Buttons](/static/images/blog/button-variants.png)
+</div>
+
+A week ago, I shared my plans to build a React UI component library from scratch. I thought I'd start with the most basic component possible: a button. How hard could it be?
+
+**Turns out, there's nothing simple about a truly good button component.** Here's what I discovered in my first week of actual development.
+
+## The Foundation: Design Tokens That Actually Work
+
+Before I could build any components, I needed to establish my design system foundation. I chose **Tailwind CSS v4's new `@theme` syntax**, which lets me define custom design tokens directly in CSS:
+
+```css
+@theme {
+  --color-primary-500: #3a30e8;
+  --color-neutral-100: #e1e3e6;
+  --font-size-body: 0.875rem;
+  --radius-md: 0.5rem;
+  --shadow-primary-sm: 0 4px 6px -1px rgb(58 48 232 / 0.1);
+}
+```
+
+This approach gives me complete control over my design tokens while still leveraging Tailwind's utility classes. I can reference these tokens directly in my components as `bg-primary-500` or `text-body`, creating a consistent design language from day one.
+
+I also built a comprehensive typography system based on research from 44+ design systems, organizing everything into four hierarchical levels:
+
+- **Display** — For hero sections and major headings
+- **Heading** — For section titles and content hierarchy
+- **Body** — For main content and descriptions
+- **Label** — For UI elements and form labels
+
+This structure handles most UI needs without overwhelming developers with too many choices.
+
+## The Button That Taught Me Everything
+
+Starting with a button seemed like the obvious choice—it's fundamental, widely used, and conceptually simple. But as I dove deeper, I realized that **a production-ready button component touches nearly every aspect of a design system**.
+
+### Accessibility From the Ground Up
+
+Rather than bolting on accessibility as an afterthought, I decided to use [React Aria](https://react-spectrum.adobe.com/react-aria/) as my foundation. This library handles the complex accessibility patterns that are easy to get wrong:
+
+```tsx
+import { useButton } from 'react-aria'
+import { forwardRef } from 'react'
+
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+  const { buttonProps } = useButton(props, ref)
+
+  return (
+    <button {...buttonProps} ref={ref}>
+      {props.children}
+    </button>
+  )
+})
+```
+
+React Aria automatically handles keyboard navigation, focus management, screen reader compatibility, and cross-platform press events. It's like having an accessibility expert built into every component.
+
+### The API Design Challenge
+
+Designing the component's API proved more complex than I expected. I had to balance flexibility with simplicity:
+
+```ts
+export interface ButtonProps
+  extends Pick<AriaButtonProps, 'onPress' | 'isDisabled' | 'aria-label' | 'aria-describedby'> {
+  children?: React.ReactNode
+  variant?: 'primary' | 'secondary' | 'outline'
+  size?: 'sm' | 'md' | 'lg'
+  className?: string
+}
+```
+
+The key insight was using TypeScript's `Pick` utility to selectively expose React Aria props rather than the entire interface. This gives users access to essential accessibility features while keeping the API manageable.
+
+### Styling Architecture: CVA for the Win
+
+For styling, I discovered [Class Variance Authority (CVA)](https://cva.style/), which provides a clean way to handle component variants:
+
+```ts
+const buttonVariants = cva(
+  'inline-flex items-center justify-center rounded font-medium transition-colors',
+  {
+    variants: {
+      variant: {
+        primary: 'bg-primary-500 text-white hover:bg-primary-600',
+        secondary: 'bg-neutral-100 text-neutral-900 hover:bg-neutral-200',
+        outline: 'border border-neutral-200 bg-transparent hover:bg-neutral-50',
+      },
+      size: {
+        sm: 'h-8 px-3 text-label',
+        md: 'h-9 px-4 text-label-lg',
+        lg: 'h-10 px-6 text-body-md',
+      },
+    },
+    defaultVariants: {
+      variant: 'primary',
+      size: 'md',
+    },
+  }
+)
+```
+
+CVA perfectly bridges the gap between type safety and flexible styling, giving me excellent TypeScript support while keeping the component code clean.
+
+### The Polymorphic Button Problem
+
+Just when I thought I was done, I realized I needed link functionality. Users should be able to pass an `href` prop and get a link that looks exactly like a button. This led me into the world of **polymorphic components**:
+
+```tsx
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+  if (props.href) {
+    return (
+      <Link href={props.href} target={props.target}>
+        <button {...buttonProps} ref={ref}>
+          {props.children}
+        </button>
+      </Link>
+    )
+  }
+
+  return (
+    <button {...buttonProps} ref={ref}>
+      {props.children}
+    </button>
+  )
+})
+```
+
+This pattern lets users write `<Button href="/about">About</Button>` and get proper link semantics with button styling—exactly what they expect.
+
+## What Surprised Me
+
+**TypeScript is more helpful than I expected** — Using utility types like `Pick` and proper interface design caught so many potential issues early. The initial setup time pays dividends throughout development.
+
+**Accessibility complexity is front-loaded** — React Aria handles the hard parts upfront, but you need to understand the patterns. Once you do, future components become much easier.
+
+**Design tokens need real usage to validate** — My typography system looked great on paper, but actually implementing it in the button revealed gaps and inconsistencies that needed addressing.
+
+**Component architecture decisions compound** — Early choices about `forwardRef`, prop naming, and variant patterns will influence every future component. Getting the foundation right is crucial.
+
+## The Learning Continues
+
+Building one button component taught me more about design systems than months of reading about them. I now have a solid foundation for the components that follow:
+
+- **Proven accessibility strategy** with React Aria
+- **Flexible styling architecture** with CVA and Tailwind
+- **Design tokens** that actually work in practice
+- **TypeScript patterns** for maintainable APIs
+
+Next up, I'm tackling **form inputs and modals**—components that will test different aspects of this foundation. Each one will teach me something new about the intersection of design, development, and user experience.
+
+The goal isn't to build the next big UI library. It's to understand every decision that goes into scalable component architecture. One component at a time.
+
+---
+
+_This is part of my learning-in-public journey. Follow along as I document the process of building a design system from the ground up._

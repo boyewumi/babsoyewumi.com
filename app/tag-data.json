@@ -1,7 +1,15 @@
 {
-  "react": 1,
+  "react": 2,
   "design-system": 1,
   "vite": 1,
-  "typescript": 1,
-  "frontend": 1
+  "typescript": 2,
+  "frontend": 1,
+  "ui-library": 1,
+  "design-systems": 1,
+  "accessibility": 1,
+  "react-aria": 1,
+  "tailwind": 1,
+  "cva": 1,
+  "component-architecture": 1,
+  "learning-in-public": 1
 }
