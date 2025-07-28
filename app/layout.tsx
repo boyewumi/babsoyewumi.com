@@ -26,35 +26,6 @@ export const metadata: Metadata = {
     default: siteMetadata.title,
     template: `%s | ${siteMetadata.title}`,
   },
-  icons: {
-    icon: [
-      {
-        url: `${basePath}/static/images/logo/favicon-16x16.png`,
-        sizes: '16x16',
-        type: 'image/png',
-      },
-      {
-        url: `${basePath}/static/images/logo/favicon-32x32.png`,
-        sizes: '32x32',
-        type: 'image/png',
-      },
-    ],
-    shortcut: `${basePath}/static/images/logo/favicon-32x32.png`,
-    apple: [
-      {
-        url: `${basePath}/static/images/logo/apple-touch-icon.png`,
-        sizes: '76x76',
-        type: 'image/png',
-      },
-    ],
-    other: [
-      {
-        rel: 'mask-icon',
-        url: `${basePath}/static/images/logo/logo.svg`,
-        color: '#31688e',
-      },
-    ],
-  },
   description: siteMetadata.description,
   openGraph: {
     title: siteMetadata.title,
@@ -100,6 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         name="bingbot"
         content="index,follow,max-video-preview:-1,max-image-preview:large,max-snippet:-1"
       />
+      <link rel="shortcut icon" href={`${basePath}/static/images/logo/favicon.ico`}></link>
       <link
         rel="apple-touch-icon"
         sizes="76x76"
