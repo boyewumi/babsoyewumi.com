@@ -71,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         name="bingbot"
         content="index,follow,max-video-preview:-1,max-image-preview:large,max-snippet:-1"
       />
-      <link rel="shortcut icon" href={`${basePath}/static/images/logo/favicon.ico`}></link>
+      <link rel="icon" href="/favicon.ico" type="image/x-icon" />
       <link
         rel="apple-touch-icon"
         sizes="76x76"
