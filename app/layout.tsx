@@ -72,10 +72,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         content="index,follow,max-video-preview:-1,max-image-preview:large,max-snippet:-1"
       />
       <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       <link
-        rel="apple-touch-icon"
-        sizes="76x76"
-        href={`${basePath}/static/images/logo/apple-touch-icon.png`}
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href={`${basePath}/static/images/logo/favicon-16x16.png`}
       />
       <link
         rel="icon"
@@ -84,13 +86,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         href={`${basePath}/static/images/logo/favicon-32x32.png`}
       />
       <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href={`${basePath}/static/images/logo/favicon-16x16.png`}
+        rel="apple-touch-icon"
+        sizes="76x76"
+        href={`${basePath}/static/images/logo/apple-touch-icon.png`}
       />
       <link rel="manifest" href={`${basePath}/static/images/logo/site.webmanifest`} />
-      <link rel="mask-icon" href={`${basePath}/static/images/logo/logo.svg`} color="#31688e" />
+      <meta name="theme-color" content="#31688e"></meta>
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
