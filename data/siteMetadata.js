@@ -7,7 +7,7 @@ const siteMetadata = {
     'Sharing learnings and insights from my journey with Design Systems and React DevTools. 5+ years of React development experience.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://babsoyewumi.com/',
+  siteUrl: 'https://babsoyewumi.com',
   siteRepo: 'https://github.com/boyewumi/babsoyewumi.com',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo/favicon-32x32.png`,
   socialBanner: '',
